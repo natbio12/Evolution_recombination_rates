@@ -1,0 +1,7 @@
+chr2	838	483222	1	PikesPeak	0	0	1	0	0	0
+chr2	483222	484040	2	Flagstaff,PikesPeak	0	1	1	0	0	0
+chr2	484040	10287591	3	Flagstaff,PikesPeak,Dmiranda	0	1	1	1	0	0
+chr2	10287591	10812999	2	Flagstaff,PikesPeak	0	1	1	0	0	0
+chr2	10812999	30600371	3	Flagstaff,PikesPeak,Dmiranda	0	1	1	1	0	0
+chr2	30600371	30601069	2	Flagstaff,PikesPeak	0	1	1	0	0	0
+chr2	30601069	30601818	1	Flagstaff	0	1	0	0	0	0
