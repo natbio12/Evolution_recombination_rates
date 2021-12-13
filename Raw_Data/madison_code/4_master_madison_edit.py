@@ -38,30 +38,53 @@ for line in a_file:
 # Start a new loop through the map file and apply strip/split.
 # Then, if the value coordinates fall inside of any of bed coordinates, print them to an output file
 # seek command should allow loop to continue bed file 
+
+			sample_list=[]
+			cross_list=[]
 	
 			for LINE in map_file:
 				LINE=LINE.strip("\n")
 				LINE_array=LINE.split("\t")
-#####Need to determine what Natalia is trying to do with sample, cross, and rec. Changed LINE_array[6] to [5]
-				#sample=sum(LINE_array[5])/len(LINE_array[5]))
-				#cross=sum(LINE_array[5])
-				#rec=(int(cross)/int(sample))*100
-				#to_print=["sample",""cross","rec"]
+				name=(LINE_array[3])
+				sample_temp=(int(LINE_array[5])/int(len(LINE_array[5])))
+				sample_list.append(sample_temp)
+				sample=sum(sample_list)
+				cross_temp=int(LINE_array[4])
+				cross_list.append(cross_temp)
+				cross=sum(cross_list)
+				rec=(int(cross)/int(sample))*100
+				to_print=["sample","cross","rec"]
 				temp=[]
 				if int(LINE_array[1]) >= int(line_array[1]) and int(LINE_array[2]) <= int(line_array[2]):
 					temp.append(LINE_array[0]+"\t"+LINE_array[1]+"\t"+LINE_array[2]+"\t"+LINE_array[3]+"\t"+LINE_array[4]+"\t"+LINE_array[5]+"\n")
-					#for data in temp:
-						#sample=sum(LINE_array[4])/len(LINE_array[4])
-						#cross=sum(LINE_array[3])
-						#rec=(int(cross)/int(sample))*100
+					sample_list_2=[]
+					cross_list_2=[]
+					for data in temp:
+						sample_temp_2=(int(LINE_array[4])/int(len(LINE_array[4])))
+						sample_list_2.append(sample_temp_2)
+						sample=sum(sample_list_2)
+						cross_temp_2=int(LINE_array[4])
+						cross_list_2.append(cross_temp_2)
+						cross=sum(cross_list_2)
+
+						#Some sample numbers are 0, so define function to avoid error.
+						def rec_zero(x,y):
+							try:
+								rec=(int(x)/int(y))*100
+							except ZeroDivisionError:
+								return 0
+
+						rec=rec_zero(int(cross),int(sample))
+						
 				with open(output, 'a') as file:
 												
 #out_1=open(output, 'a')	
-					file.write(str(temp_h)+"\t"+'sample'+"\t"+'cross'+"\t"+'rec'+"\n")							
+					file.write(str(temp_h)+"\t"+str(sample)+"\t"+str(cross)+"\t"+str(rec)+"\t"+name+"\n")							
 			map_file.seek(0)
 		if col == '0':
                 	with open(output, 'a') as file:
-	                	file.write(str(temp_h)+"\t"+"NA"+"\t"+"NA"+"\t"+"NA"+"\n")
+				
+	                	file.write(str(temp_h)+"\t"+"NA"+"\t"+"NA"+"\t"+"NA"+"\t"+name+"\n")
 # Close all files
 
 	out_1.close()
